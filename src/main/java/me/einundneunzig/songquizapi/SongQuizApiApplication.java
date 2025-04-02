@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SongQuizApiNewApplication {
+public class SongQuizApiApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SongQuizApiNewApplication.class, args);
+        SpringApplication.run(SongQuizApiApplication.class, args);
     }
 
 }
