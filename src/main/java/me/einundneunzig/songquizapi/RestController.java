@@ -30,7 +30,7 @@ public class RestController {
         return opt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("getAllGenres") ResponseEntity<Set<String>> getAllGenres() {
+    @GetMapping("/getAllGenres") ResponseEntity<Set<String>> getAllGenres() {
         Set<String> set = songRepository.findAllGenres();
         return new ResponseEntity<>(set, HttpStatus.OK);
     }
