@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.Optional;
 import java.util.Set;
@@ -25,8 +26,14 @@ public class RestController {
     }
 
     @GetMapping("/getRandomSongByGenres")
-    public ResponseEntity<Song> getRandomSongByGenres(@Param("genres") Set<String> genres) {
+    public ResponseEntity<Song> getRandomSongByGenres(@RequestParam("genres") Set<String> genres) {
         Optional<Song> opt = songRepository.findRandomSongByGenres(genres);
+        return opt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("getRandomSong")
+    public ResponseEntity<Song> getRandomSong() {
+        Optional<Song> opt = songRepository.findRandomSong();
         return opt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
