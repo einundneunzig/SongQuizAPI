@@ -1,6 +1,7 @@
 package me.einundneunzig.songquizapi.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -12,9 +13,11 @@ public class Album {
     private Long id;
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "album")
     private List<Song> songs;
 
+    @JsonIgnore
     @ManyToMany
     private List<Artist> artists;
 
