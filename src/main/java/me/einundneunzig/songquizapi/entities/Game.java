@@ -18,4 +18,44 @@ public class Game {
 
     private String statisticsInSongOrder;
     private boolean isRight;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public List<Song> getSongsInOrder() {
+        return songsInOrder;
+    }
+
+    public void setSongsInOrder(List<Song> songsInOrder) {
+        this.songsInOrder = songsInOrder;
+    }
+
+    public String getStatisticsInSongOrder() {
+        return statisticsInSongOrder;
+    }
+
+    public void setStatisticsInSongOrder(String statisticsInSongOrder) {
+        this.statisticsInSongOrder = statisticsInSongOrder;
+    }
+
+    public boolean isRight() {
+        return isRight;
+    }
+
+    public void setRight(boolean right) {
+        isRight = right;
+    }
 }

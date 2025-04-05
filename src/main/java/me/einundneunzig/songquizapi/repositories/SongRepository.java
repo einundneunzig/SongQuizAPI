@@ -12,7 +12,7 @@ public interface SongRepository extends JpaRepository<Song, Long> {
 
     @Query(value = "SELECT * FROM song WHERE genre_name @> :genres ORDER BY RANDOM() LIMIT 1", nativeQuery = true)
     Optional<Song> findRandomSongByGenres(@Param("genres") Set<String> genres);
-
+    
     @Query(value = "SELECT * FROM song ORDER BY RANDOM() LIMIT 1", nativeQuery = true)
     Optional<Song> findRandomSong();
 
