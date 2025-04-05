@@ -13,7 +13,7 @@ public class Song {
     private Long id;
     private String title;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Artist> artists;
 
     @ManyToOne
