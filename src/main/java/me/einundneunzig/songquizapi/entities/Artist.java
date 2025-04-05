@@ -18,14 +18,6 @@ public class Artist {
     private LocalDate deathDate;
     private String spotifyId;
 
-    @JsonIgnore
-    @ManyToMany(mappedBy = "artists")
-    private List<Song> songs;
-
-    @JsonIgnore
-    @ManyToMany(mappedBy = "artists")
-    private List<Album> albums;
-
     public Long getId() {
         return id;
     }
@@ -82,19 +74,4 @@ public class Artist {
         this.spotifyId = spotifyId;
     }
 
-    public List<Song> getSongs() {
-        return songs;
-    }
-
-    public void setSongs(List<Song> songs) {
-        this.songs = songs;
-    }
-
-    public List<Album> getAlbums() {
-        return albums;
-    }
-
-    public void setAlbums(List<Album> albums) {
-        this.albums = albums;
-    }
 }

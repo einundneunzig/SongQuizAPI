@@ -14,11 +14,6 @@ public class Song {
     private String title;
 
     @ManyToMany
-    @JoinTable(
-            name = "song_artists",  // Name der Join-Tabelle
-            joinColumns = @JoinColumn(name = "song_id"),
-            inverseJoinColumns = @JoinColumn(name = "artists_id")
-    )
     private List<Artist> artists;
 
     @ManyToOne
