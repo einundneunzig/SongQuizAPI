@@ -21,6 +21,7 @@ public class Album {
     @ManyToMany
     private List<Artist> artists;
 
+    @Column(unique = true)
     private String spotifyId;
 
     public Long getId() {

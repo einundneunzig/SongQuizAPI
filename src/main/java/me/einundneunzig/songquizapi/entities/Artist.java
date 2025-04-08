@@ -16,6 +16,7 @@ public class Artist {
     private String sex;
     private LocalDate birthDate;
     private LocalDate deathDate;
+    @Column(unique = true)
     private String spotifyId;
 
     public Long getId() {

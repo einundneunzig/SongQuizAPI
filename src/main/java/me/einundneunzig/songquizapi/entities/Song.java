@@ -24,7 +24,9 @@ public class Song {
     @ElementCollection
     private Set<String> genres;
 
+    @Column(unique = true)
     private String spotifyId;
+
     private String songText;
     private String instrumentalVersion;
 
