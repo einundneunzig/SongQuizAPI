@@ -11,6 +11,7 @@ public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
 
     @ManyToMany
@@ -27,21 +28,23 @@ public class Song {
     @Column(unique = true)
     private String spotifyId;
 
+    @Column(length = 5000)
     private String songText;
+
     private String instrumentalVersion;
 
-    private long spotifyViews;
+    private long spotifyViews = 0;
 
-    private int likes;
-    private int dislikes;
+    private int likes = 0;
+    private int dislikes = 0;
 
     @ManyToOne
     private Song originalSong;
 
-    private boolean explicit;
-    private int popularity;
+    private boolean explicit = false;
+    private int popularity = 0;
     private String isrc;
-    private boolean falseInfo;
+    private boolean falseInfo = false;
 
     public Long getId() {
         return id;
