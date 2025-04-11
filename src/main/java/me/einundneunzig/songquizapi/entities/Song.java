@@ -43,6 +43,7 @@ public class Song {
 
     private boolean explicit = false;
     private int popularity = 0;
+    @Column(unique = true)
     private String isrc;
     private boolean falseInfo = false;
 
