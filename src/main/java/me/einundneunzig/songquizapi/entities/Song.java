@@ -31,6 +31,9 @@ public class Song {
     @Column(length = 5000)
     private String songText;
 
+    @Column(length = 10)
+    private String language;
+
     private String instrumentalVersion;
 
     private long spotifyViews = 0;
@@ -180,5 +183,13 @@ public class Song {
 
     public void setFalseInfo(boolean falseInfo) {
         this.falseInfo = falseInfo;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
     }
 }

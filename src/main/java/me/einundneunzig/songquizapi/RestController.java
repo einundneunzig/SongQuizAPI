@@ -24,6 +24,24 @@ public class RestController {
         this.songRepository = songRepository;
     }
 
+    @GetMapping("/getRandomSongByLanguageGenresAndPopularity")
+    public ResponseEntity<Song> getRandomSongByLanguageGenresAndPopularity(@RequestParam("language") String language, @RequestParam("genres") Set<String> genres, @RequestParam("popularity") int popularity) {
+        Optional<Song> opt = songRepository.findRandomSongByLanguageGenresAndPopularity(language, genres, popularity);
+        return opt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/getRandomSongByLanguageAndGenres")
+    public ResponseEntity<Song> getRandomSongByLanguageAndGenres(@RequestParam("language") String language, @RequestParam("genres") Set<String> genres) {
+        Optional<Song> opt = songRepository.findRandomSongByLanguageAndGenres(language, genres);
+        return opt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/getRandomSongByLanguage")
+    public ResponseEntity<Song> getRandomSongByLanguage(@RequestParam("language") String language) {
+        Optional<Song> opt = songRepository.findRandomSongByLanguage(language);
+        return opt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
     @GetMapping("/getRandomSongByGenres")
     public ResponseEntity<Song> getRandomSongByGenres(@RequestParam("genres") Set<String> genres) {
         Optional<Song> opt = songRepository.findRandomSongByGenres(genres);
