@@ -24,35 +24,35 @@ public class RestController {
         this.songRepository = songRepository;
     }
 
-    @GetMapping("/getRandomSongByLanguageGenresAndPopularity")
-    public ResponseEntity<Song> getRandomSongByLanguageGenresAndPopularity(@RequestParam("language") String language, @RequestParam("genres") Set<String> genres, @RequestParam("popularity") int popularity) {
-        Optional<Song> opt = songRepository.findRandomSongByLanguageGenresAndPopularity(language, genres, popularity);
+    @GetMapping("/getRandomSong")
+    public ResponseEntity<Song> getRandomSong(
+            @RequestParam(value = "language", required = false) String language,
+            @RequestParam(value = "genres", required = false) Set<String> genres,
+            @RequestParam(value = "popularity", required = false) Integer popularity) {
+
+        Optional<Song> opt;
+
+        if (genres != null && popularity != null && language != null) {
+            opt = songRepository.findRandomSongByLanguageGenresAndPopularity(language, genres, popularity);
+        } else if(genres != null && popularity != null) {
+            opt = songRepository.findRandomSongByGenreAndPopularity(genres, popularity);
+        } else if (genres != null && language != null) {
+            opt = songRepository.findRandomSongByLanguageAndGenres(language, genres);
+        } else if(popularity != null &&  language!= null) {
+            opt = songRepository.findRandomSongByLanguageAndPopularity(language, popularity);
+        }else if(genres != null){
+            opt = songRepository.findRandomSongByGenres(genres);
+        }else if(popularity != null){
+            opt = songRepository.findRandomSongByPopularity(popularity);
+        } else if (language != null) {
+            opt = songRepository.findRandomSongByLanguage(language);
+        }else{
+            opt = songRepository.findRandomSong();
+        }
+
         return opt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping("/getRandomSongByLanguageAndGenres")
-    public ResponseEntity<Song> getRandomSongByLanguageAndGenres(@RequestParam("language") String language, @RequestParam("genres") Set<String> genres) {
-        Optional<Song> opt = songRepository.findRandomSongByLanguageAndGenres(language, genres);
-        return opt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @GetMapping("/getRandomSongByLanguage")
-    public ResponseEntity<Song> getRandomSongByLanguage(@RequestParam("language") String language) {
-        Optional<Song> opt = songRepository.findRandomSongByLanguage(language);
-        return opt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @GetMapping("/getRandomSongByGenres")
-    public ResponseEntity<Song> getRandomSongByGenres(@RequestParam("genres") Set<String> genres) {
-        Optional<Song> opt = songRepository.findRandomSongByGenres(genres);
-        return opt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
-
-    @GetMapping("getRandomSong")
-    public ResponseEntity<Song> getRandomSong() {
-        Optional<Song> opt = songRepository.findRandomSong();
-        return opt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-    }
 
     @GetMapping("/getAllGenres") ResponseEntity<Set<String>> getAllGenres() {
         Set<String> set = songRepository.findAllGenres();
