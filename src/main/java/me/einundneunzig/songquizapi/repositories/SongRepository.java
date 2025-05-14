@@ -13,30 +13,30 @@ public interface SongRepository extends JpaRepository<Song, Long> {
     @Query(value = """
     SELECT s.* FROM song s
     JOIN song_genres sg ON s.id = sg.song_id
-    WHERE s.language = :language
+    WHERE s.language IN (:languages)
       AND sg.genres IN (:genres)
       AND s.popularity >= :popularity
     ORDER BY RANDOM() LIMIT 1
 """, nativeQuery = true)
-    Optional<Song> findRandomSongByLanguageGenresAndPopularity(@Param("language") String language, @Param("genres") Set<String> genres, @Param("popularity") int popularity);
+    Optional<Song> findRandomSongByLanguagesGenresAndPopularity(@Param("languages") Set<String> languages, @Param("genres") Set<String> genres, @Param("popularity") int popularity);
 
 
     @Query(value = """
     SELECT s.* FROM song s
     JOIN song_genres sg ON s.id = sg.song_id
-    WHERE s.language = :language
+    WHERE s.language IN (:languages)
       AND sg.genres IN (:genres)
     ORDER BY RANDOM() LIMIT 1
 """, nativeQuery = true)
-    Optional<Song> findRandomSongByLanguageAndGenres(@Param("language") String language, @Param("genres") Set<String> genres);
+    Optional<Song> findRandomSongByLanguagesAndGenres(@Param("languages") Set<String> languages, @Param("genres") Set<String> genres);
 
 
     @Query(value = """
     SELECT * FROM song
-    WHERE language = :language
+    WHERE language IN (:languages)
     ORDER BY RANDOM() LIMIT 1
 """, nativeQuery = true)
-    Optional<Song> findRandomSongByLanguage(@Param("language") String language);
+    Optional<Song> findRandomSongByLanguages(@Param("languages") Set<String> languages);
 
 
     @Query(value = """
@@ -73,11 +73,11 @@ public interface SongRepository extends JpaRepository<Song, Long> {
 
     @Query(value = """
     SELECT * FROM song
-    WHERE language = :language
+    WHERE language IN (:languages)
       AND popularity >= :popularity
     ORDER BY RANDOM() LIMIT 1
 """, nativeQuery = true)
-    Optional<Song> findRandomSongByLanguageAndPopularity(@Param("language") String language, @Param("popularity") Integer popularity);
+    Optional<Song> findRandomSongByLanguagesAndPopularity(@Param("languages") Set<String> languages, @Param("popularity") Integer popularity);
 
 
     @Query(value = """

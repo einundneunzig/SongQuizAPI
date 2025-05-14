@@ -26,26 +26,26 @@ public class RestController {
 
     @GetMapping("/getRandomSong")
     public ResponseEntity<Song> getRandomSong(
-            @RequestParam(value = "language", required = false) String language,
+            @RequestParam(value = "languages", required = false) Set<String> languages,
             @RequestParam(value = "genres", required = false) Set<String> genres,
             @RequestParam(value = "popularity", required = false) Integer popularity) {
 
         Optional<Song> opt;
 
-        if (genres != null && popularity != null && language != null) {
-            opt = songRepository.findRandomSongByLanguageGenresAndPopularity(language, genres, popularity);
+        if (genres != null && popularity != null && languages != null) {
+            opt = songRepository.findRandomSongByLanguagesGenresAndPopularity(languages, genres, popularity);
         } else if(genres != null && popularity != null) {
             opt = songRepository.findRandomSongByGenreAndPopularity(genres, popularity);
-        } else if (genres != null && language != null) {
-            opt = songRepository.findRandomSongByLanguageAndGenres(language, genres);
-        } else if(popularity != null &&  language!= null) {
-            opt = songRepository.findRandomSongByLanguageAndPopularity(language, popularity);
+        } else if (genres != null && languages != null) {
+            opt = songRepository.findRandomSongByLanguagesAndGenres(languages, genres);
+        } else if(popularity != null &&  languages!= null) {
+            opt = songRepository.findRandomSongByLanguagesAndPopularity(languages, popularity);
         }else if(genres != null){
             opt = songRepository.findRandomSongByGenres(genres);
         }else if(popularity != null){
             opt = songRepository.findRandomSongByPopularity(popularity);
-        } else if (language != null) {
-            opt = songRepository.findRandomSongByLanguage(language);
+        } else if (languages != null) {
+            opt = songRepository.findRandomSongByLanguages(languages);
         }else{
             opt = songRepository.findRandomSong();
         }
