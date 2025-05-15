@@ -60,6 +60,16 @@ public interface SongRepository extends JpaRepository<Song, Long> {
 """, nativeQuery = true)
     Optional<Set<String>> findAllGenres();
 
+    
+
+    @Query(value = """
+    SELECT genres, COUNT(song_id) AS genre_count
+    FROM song_genres
+    GROUP BY genres
+    ORDER BY genre_count DESC;
+    """, nativeQuery = true)
+    Optional<List<String>> findAllGenresOrderedByGenreCount();
+    
     @Query(value = """
     SELECT DISTINCT language FROM song
 """, nativeQuery = true)
