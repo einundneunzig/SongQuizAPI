@@ -32,6 +32,13 @@ public class RestController {
         return opt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/getAllGenresOrdered")
+    public ResponseEntity<List<String>> getAllGenresOrdered(){
+        Optional<List<String>> opt;
+        opt = songRepository.findAllGenresOrderedByGenreCount();
+        return opt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    
     @GetMapping("/getAllLanguages")
     public ResponseEntity<Set<String>> getAllLanguages(){
         Optional<Set<String>> opt;
