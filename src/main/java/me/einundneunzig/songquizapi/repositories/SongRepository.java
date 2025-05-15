@@ -64,10 +64,10 @@ public interface SongRepository extends JpaRepository<Song, Long> {
     
 
     @Query(value = """
-    SELECT genres, COUNT(song_id) AS genre_count
+    SELECT genres AS genre_count
     FROM song_genres
     GROUP BY genres
-    ORDER BY genre_count DESC;
+    ORDER BY COUNT(song_id) DESC;
     """, nativeQuery = true)
     Optional<List<String>> findAllGenresOrderedByGenreCount();
     
