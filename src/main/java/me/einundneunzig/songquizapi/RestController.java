@@ -24,6 +24,21 @@ public class RestController {
         this.songRepository = songRepository;
     }
 
+    
+    @GetMapping("/getAllGenres")
+    public ResponseEntity<Set<String>> getAllGenres(){
+        Optional<Set<String>> opt;
+        opt = songRepository.findAllGenres();
+        return opt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+    
+    @GetMapping("/getAllLanguages")
+    public ResponseEntity<Set<String>> getAllLanguages(){
+        Optional<Set<String>> opt;
+        opt = songRepository.findAllLanguages();
+        return opt.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+        
     @GetMapping("/getRandomSong")
     public ResponseEntity<Song> getRandomSong(
             @RequestParam(value = "languages", required = false) Set<String> languages,
