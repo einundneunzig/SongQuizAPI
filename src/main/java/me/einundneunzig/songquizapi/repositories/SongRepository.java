@@ -56,10 +56,14 @@ public interface SongRepository extends JpaRepository<Song, Long> {
 
 
     @Query(value = """
-    SELECT DISTINCT unnest(genre_name) FROM song
+    SELECT DISTINCT unnest(genre) FROM song_genres
 """, nativeQuery = true)
     Set<String> findAllGenres();
 
+    @Query(value = """
+    SELECT DISTINCT unnest(language) FROM song
+""", nativeQuery = true)
+    Set<String> findAllLanguages();
 
     @Query(value = """
     SELECT s.* FROM song s
